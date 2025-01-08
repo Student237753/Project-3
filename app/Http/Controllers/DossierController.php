@@ -12,7 +12,7 @@ class DossierController extends Controller
      */
     public function index()
     {
-        //
+       //
     }
 
     /**
