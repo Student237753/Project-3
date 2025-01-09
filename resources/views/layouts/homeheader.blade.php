@@ -1,7 +1,9 @@
 <div class="bg-indigo-900 flex items-center justify-between p-4 h-20">
     <!-- Logo Placeholder -->
     <div class="flex items-center">
+        <a href="{{ route('index') }}">
         <img src="{{ asset('assets/SummaLogoHeader.png') }}" alt="Logo" class="h-16">
+        </a>
     </div>
 
     <!-- Title -->
