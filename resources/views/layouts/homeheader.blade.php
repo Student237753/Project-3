@@ -13,10 +13,10 @@
         </h1>
     </div>
 
-    <!-- Button -->
+    <!-- Create new dossier Button -->
     <div class="flex items-center">
-        <button class="bg-white text-black font-bold px-6 py-2 rounded-full shadow hover:bg-gray-100">
+        <a href="{{route('create')}}" class="bg-white text-black font-bold px-6 py-2 rounded-full shadow hover:bg-gray-100">
             Maak nieuwe dossier aan
-        </button>
+        </a>
     </div>
 </div>

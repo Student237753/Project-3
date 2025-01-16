@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('dossiers', function (Blueprint $table) {
             $table->id();
+            $table->string('subject');
+            $table->string('type');
+            $table->dateTime('appointment')->nullable()->format('Y-m-d H:i');
             $table->timestamps();
+
         });
     }
 

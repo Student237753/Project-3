@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('dossierid')->constrained('dossiers')->onDelete('cascade');
+            $table->text('symptoms')->nullable();
+            $table->text('caseexplanation')->nullable();
+            $table->text('research')->nullable();
             $table->timestamps();
         });
     }
