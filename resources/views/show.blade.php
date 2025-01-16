@@ -33,7 +33,7 @@
                 <span class="font-semibold text-gray-700">Afspraak:</span>
                 <span class="text-gray-900">
         @if($dossier->appointment)
-                        {{ $dossier->appointment->format('Y-m-d H:i') }}
+                        {{ $dossier->appointment->format('d-m-Y H:i') }}
                     @else
                         Geen afspraak ingepland
                     @endif
@@ -41,11 +41,11 @@
             </div>
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Aangemaakt op:</span>
-                <span class="text-gray-900">{{ $dossier->created_at->format('d-m-Y') }}</span>
+                <span class="text-gray-900">{{ $dossier->created_at->format('d-m-Y H:i') }}</span>
             </div>
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Laatst aangepast op:</span>
-                <span class="text-gray-900">{{ $dossier->updated_at->format('d-m-Y') }}</span>
+                <span class="text-gray-900">{{ $dossier->updated_at->format('d-m-Y H:i') }}</span>
             </div>
         </div>
         <div class="mt-6 flex space-x-4">

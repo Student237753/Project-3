@@ -15,7 +15,7 @@
 
     <!-- Create new dossier Button -->
     <div class="flex items-center">
-        <a href="{{route('index')}}" class="bg-white text-black font-bold px-6 py-2 rounded-full shadow hover:bg-gray-100">
+        <a href="{{route('create')}}" class="bg-white text-black font-bold px-6 py-2 rounded-full shadow hover:bg-gray-100">
             Maak nieuwe dossier aan
         </a>
     </div>
