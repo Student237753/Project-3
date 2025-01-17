@@ -55,106 +55,106 @@
             <p class="text-xl">Organen:</p>
             <div class="flex flex-col overflow-y-auto max-h-52 bg-indigo-800 text-white text-xl">
                 <div class="flex">
-                    <input type="checkbox" value="Hersenen" class="w-4" name="organs"><label for="Hersenen">Hersenen</label>
+                    <input type="checkbox" value="Brain" class="w-4" name="organs"><label for="Hersenen">Hersenen</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Hart" class="w-4" name="organs"><label for="Hart">Hart</label>php
+                    <input type="checkbox" value="Heart" class="w-4" name="organs"><label for="Hart">Hart</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Longen" class="w-4" name="organs"><label for="Longen">Longen</label>
+                    <input type="checkbox" value="Lungs" class="w-4" name="organs"><label for="Longen">Longen</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Slokdarm" class="w-4" name="organs"><label for="Slokdarm">Slokdarm</label>
+                    <input type="checkbox" value="Esophagus" class="w-4" name="organs"><label for="Slokdarm">Slokdarm</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Luchtpijp" class="w-4" name="organs"><label for="Luchtpijp">Luchtpijp</label>
+                    <input type="checkbox" value="Trachea" class="w-4" name="organs"><label for="Luchtpijp">Luchtpijp</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Dikke darm" class="w-4" name="organs"><label for="Dikke darm">Dikke darm</label>
+                    <input type="checkbox" value="Colon" class="w-4" name="organs"><label for="Dikke darm">Dikke darm</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Dunne darm" class="w-4" name="organs"><label for="Dunne darm">Dunne darm</label>
+                    <input type="checkbox" value="Small Intestine" class="w-4" name="organs"><label for="Dunne darm">Dunne darm</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Twaalfvingerige darm" class="w-4" name="organs"><label for="Twaalfvingerige darm">Twaalfvingerige darm</label>
+                    <input type="checkbox" value="Duodenum" class="w-4" name="organs"><label for="Twaalfvingerige darm">Twaalfvingerige darm</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Endeldarm" class="w-4" name="organs"><label for="Endeldarm">Endeldarm</label>
+                    <input type="checkbox" value="Rectum" class="w-4" name="organs"><label for="Endeldarm">Endeldarm</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Maag" class="w-4" name="organs"><label for="Maag">Maag</label>
+                    <input type="checkbox" value="Stomach" class="w-4" name="organs"><label for="Maag">Maag</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Lever" class="w-4" name="organs"><label for="Lever">Lever</label>
+                    <input type="checkbox" value="Liver" class="w-4" name="organs"><label for="Lever">Lever</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Galblaas" class="w-4" name="organs"><label for="Galblaas">Galblaas</label>
+                    <input type="checkbox" value="Gallbladder" class="w-4" name="organs"><label for="Galblaas">Galblaas</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Nieren" class="w-4" name="organs"><label for="Nieren">Nieren</label>
+                    <input type="checkbox" value="Kidneys" class="w-4" name="organs"><label for="Nieren">Nieren</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Blaas" class="w-4" name="organs"><label for="Blaas">Blaas</label>
+                    <input type="checkbox" value="Bladder" class="w-4" name="organs"><label for="Blaas">Blaas</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Baarmoeder" class="w-4" name="organs"><label for="Baarmoeder">Baarmoeder</label>
+                    <input type="checkbox" value="Uterus" class="w-4" name="organs"><label for="Baarmoeder">Baarmoeder</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Ogen" class="w-4" name="organs"><label for="Ogen">Ogen</label>
+                    <input type="checkbox" value="Eyes" class="w-4" name="organs"><label for="Ogen">Ogen</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Oren" class="w-4" name="organs"><label for="Oren">Oren</label>
+                    <input type="checkbox" value="Ears" class="w-4" name="organs"><label for="Oren">Oren</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Neus" class="w-4" name="organs"><label for="Neus">Neus</label>
+                    <input type="checkbox" value="Nose" class="w-4" name="organs"><label for="Neus">Neus</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Mondholte" class="w-4" name="organs"><label for="Mondholte">Mondholte</label>
+                    <input type="checkbox" value="Oral cavity" class="w-4" name="organs"><label for="Mondholte">Mondholte</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Keelholte" class="w-4" name="organs"><label for="Keelholte">Keelholte</label>
+                    <input type="checkbox" value="Pharynx" class="w-4" name="organs"><label for="Keelholte">Keelholte</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Schildklier" class="w-4" name="organs"><label for="Schildklier">Schildklier</label>
+                    <input type="checkbox" value="Thyroid" class="w-4" name="organs"><label for="Schildklier">Schildklier</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Alvleesklier" class="w-4" name="organs"><label for="Alvleesklier">Alvleesklier</label>
+                    <input type="checkbox" value="Pancreas" class="w-4" name="organs"><label for="Alvleesklier">Alvleesklier</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Kleine bloedsomloop" class="w-4" name="organs"><label for="Kleine bloedsomloop">Kleine bloedsomloop</label>
+                    <input type="checkbox" value="Small Circulatory System" class="w-4" name="organs"><label for="Kleine bloedsomloop">Kleine bloedsomloop</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Grote bloedsomloop" class="w-4" name="organs"><label for="Grote bloedsomloop">Grote bloedsomloop</label>
+                    <input type="checkbox" value="Big Circulatory System" class="w-4" name="organs"><label for="Grote bloedsomloop">Grote bloedsomloop</label>
                 </div>
                 <div class="flex">
                     <input type="checkbox" value="Aorta" class="w-4" name="organs"><label for="Aorta">Aorta</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Huid" class="w-4" name="organs"><label for="Huid">Huid</label>
+                    <input type="checkbox" value="Skin" class="w-4" name="organs"><label for="Huid">Huid</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Eierstokken" class="w-4" name="organs"><label for="Eierstokken">Eierstokken</label>
+                    <input type="checkbox" value="Ovaries" class="w-4" name="organs"><label for="Eierstokken">Eierstokken</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Prostaat" class="w-4" name="organs"><label for="Prostaat">Prostaat</label>
+                    <input type="checkbox" value="Prostate" class="w-4" name="organs"><label for="Prostaat">Prostaat</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Zaadballen" class="w-4" name="organs"><label for="Zaadballen">Zaadballen</label>
+                    <input type="checkbox" value="Testicles" class="w-4" name="organs"><label for="Zaadballen">Zaadballen</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Skelet" class="w-4" name="organs"><label for="Skelet">Skelet</label>
+                    <input type="checkbox" value="Skeleton" class="w-4" name="organs"><label for="Skelet">Skelet</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Hypofyse" class="w-4" name="organs"><label for="Hypofyse">Hypofyse</label>
+                    <input type="checkbox" value="Pituitary" class="w-4" name="organs"><label for="Hypofyse">Hypofyse</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Lymfeklieren" class="w-4" name="organs"><label for="Lymfeklieren">Lymfeklieren</label>
+                    <input type="checkbox" value="Lymph nodes" class="w-4" name="organs"><label for="Lymfeklieren">Lymfeklieren</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Zenuwstelsel" class="w-4" name="organs"><label for="Zenuwstelsel">Zenuwstelsel</label>
+                    <input type="checkbox" value="Nervous system" class="w-4" name="organs"><label for="Zenuwstelsel">Zenuwstelsel</label>
                 </div>
                 <div class="flex">
-                    <input type="checkbox" value="Extremiteiten" class="w-4" name="organs"><label for="Extremiteiten">Extremiteiten</label>
+                    <input type="checkbox" value="Extremities" class="w-4" name="organs"><label for="Extremiteiten">Extremiteiten</label>
                 </div>
             </div>
 
