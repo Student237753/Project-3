@@ -32,12 +32,21 @@ class HomeController extends Controller
         $request->validate([
             'subject' => 'required|string|max:255',
             'type' => 'required|string|max:255',
+            'research' => 'nullable|string|max:255',
+            'symptoms' => 'required|string|max:255',
+            'treatment' => 'nullable|string|max:255',
+            'urgency' => 'required|string|max:255',
+            'questions' => 'nullable|string|max:255',
             'appointment' => 'nullable|date_format:Y-m-d H:i',
         ]);
 
         $dossier = new Dossier();
         $dossier->subject = $request->input('subject');
         $dossier->type = $request->input('type');
+        $dossier->research = $request->input('research');
+        $dossier->symptoms = $request->input('symptoms');
+        $dossier->treatment = $request->input('treatment');
+        $dossier->questions = $request->input('questions');
         $dossier->appointment = $request->has('appointment')
             ? $request->input('appointment')
             : now()->format('Y-m-d H:i'); // Automatically set to now if not provided
