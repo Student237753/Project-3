@@ -55,7 +55,7 @@
                                 Bewerken
                             </a>
                             <a href="{{ route('show', $dossier->id) }}" class="bg-white text-black font-semibold px-4 py-1 rounded-lg shadow hover:bg-gray-100 w-full md:w-auto">
-                                Show
+                                Bekijk
                             </a>
                         </div>
                     </div>
