@@ -19,10 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::get('/index', [HomeController::class, 'index'])->name('index');
-Route::get('/edit', [HomeController::class, 'edit'])->name('edit');
+Route::put('/index/{id}', [HomeController::class, 'update'])->name('update');
 Route::get('/create', [HomeController::class, 'create'])->name('create');
 Route::post('/store', [HomeController::class, 'store'])->name('store');
 Route::delete('/index/{id}', [HomeController::class, 'destroy'])->name('destroy');
 Route::get('/index/{id}', [HomeController::class, 'show'])->name('show');
+Route::get('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
 
 require __DIR__.'/auth.php';

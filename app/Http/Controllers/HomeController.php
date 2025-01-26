@@ -7,28 +7,22 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    {
-        $dossiers = Dossier::all(); // Gets all Data-rows from the 'dossiers' table
+    {   // Haalt alle data op van alle kolommen in de dossiers tabel
+        $dossiers = Dossier::all();
+        // Weergeeft index pagina en geeft alle gevonden dossiers door
         return view('index', compact('dossiers')); // Passes the data to the view
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        // Weergeeft create pagina
         return view('create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        // Validatie controle voor alle nieuwe informatie
         $request->validate([
             'subject' => 'required|string|max:255',
             'type' => 'required|string|max:255',
@@ -40,6 +34,7 @@ class HomeController extends Controller
             'appointment' => 'nullable|date_format:Y-m-d H:i',
         ]);
 
+        // Maakt nieuwe dossier aan en vult het met de ingevoerde informatie
         $dossier = new Dossier();
         $dossier->subject = $request->input('subject');
         $dossier->type = $request->input('type');
@@ -47,50 +42,48 @@ class HomeController extends Controller
         $dossier->symptoms = $request->input('symptoms');
         $dossier->treatment = $request->input('treatment');
         $dossier->questions = $request->input('questions');
-        $dossier->appointment = $request->has('appointment')
-            ? $request->input('appointment')
-            : now()->format('Y-m-d H:i'); // Automatically set to now if not provided
+        $dossier->appointment = $request->has('appointment');
+        // Slaat de gevalideerde informatie op in de database voor de nieuwe dossier
         $dossier->save();
-
-        return redirect()->route('index')->with('success', 'Dossier created successfully.');
+        // Redirect naar de index pagina
+        return redirect()->route('index');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        // Fetch the Dossier by its ID
-        $dossier = Dossier::findOrFail($id);
-
-        // Return the view with the dossier data
+        // Haalt het dossier door middel van id en de bijbehorende diagnoses
+        $dossier = Dossier::with('diagnoses')->findOrFail($id);
+        // Weergeeft show pagina en geeft het gevonden dossier met de bijbehorende diagnose door.
         return view('show', compact('dossier'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        // Haalt het dossier door middel van id
+        $dossier = Dossier::findOrFail($id);
+        // Weergeeft edit pagina en geeft het gevonden dossier door.
+        return view('edit', compact('dossier'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Haalt het dossier door middel van id
+        $dossier = Dossier::findOrFail($id);
+        // Update alle nieuwe informatie voor het dossier
+        $dossier->update($request->all());
+        // Redirect naar index pagina
+        return redirect()->route('index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
-        $dossier = Dossier::findOrFail($id); // Find the dossier by ID
-        $dossier->delete(); // Delete the dossier
+        // Haalt het dossier door middel van id
+        $dossier = Dossier::findOrFail($id);
+        // Verwijdert de diagnose die aan dit dossier gekoppeld is
+        $dossier->diagnoses()->delete();
+        // Verwijdert het dossier
+        $dossier->delete();
+        // Redirect naar de vorige pagina
         return redirect()->back();
     }
 }

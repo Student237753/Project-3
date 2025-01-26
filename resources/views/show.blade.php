@@ -16,23 +16,23 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
-    @include('layouts.header')
+@include('layouts.header')
 <main class="flex-grow flex items-center justify-center py-8 px-4">
-    <div class="bg-white rounded-lg shadow-lg p-8 max-w-3xl w-full">
+    <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl w-full">
         <h2 class="text-2xl font-bold text-indigo-900 mb-6">Dossier Details</h2>
         <div class="space-y-4">
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Type Patient:</span>
-                <span class="text-gray-900">{{ $dossier->type }}</span>
+                <span class="text-gray-900 break-words">{{ $dossier->type }}</span>
             </div>
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Onderwerp:</span>
-                <span class="text-gray-900">{{ $dossier->subject }}</span>
+                <span class="text-gray-900 break-words">{{ $dossier->subject }}</span>
             </div>
             <div class="flex justify-between items-center">
                 <span class="font-semibold text-gray-700">Afspraak:</span>
-                <span class="text-gray-900">
-        @if($dossier->appointment)
+                <span class="text-gray-900 break-words">
+                    @if($dossier->appointment)
                         {{ $dossier->appointment->format('d-m-Y H:i') }}
                     @else
                         Geen afspraak ingepland
@@ -48,6 +48,46 @@
                 <span class="text-gray-900">{{ $dossier->updated_at->format('d-m-Y H:i') }}</span>
             </div>
         </div>
+
+        <!-- Diagnose -->
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-indigo-900 mb-6">Diagnose Details</h2>
+            @if($dossier->diagnoses->isEmpty())
+                <p class="text-gray-700">Geen diagnoses gevonden.</p>
+            @else
+                @foreach($dossier->diagnoses as $diagnose)
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Symptomen:</span>
+                            <span class="text-gray-900 break-words">{{ $diagnose->symptoms }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Onderzoek:</span>
+                            <span class="text-gray-900 break-words">
+                            @if($diagnose->research)
+                                    {{ $diagnose->research }}
+                                @else
+                                    Geen
+                                @endif
+                        </span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Opmerking:</span>
+                            <span class="text-gray-900 break-words max-h-32 overflow-y-auto">
+                            @if($diagnose->caseexplanation)
+                                    {{ $diagnose->caseexplanation }}
+                                @else
+                                    Geen opmerking
+                                @endif
+                        </span>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+        <!-- Treatments Details -->
+
+
         <div class="mt-6 flex space-x-4">
             <a href="{{ route('edit', $dossier->id) }}"
                class="bg-indigo-900 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700">
@@ -68,6 +108,6 @@
         </div>
     </div>
 </main>
-    @include('layouts.footer')
+@include('layouts.footer')
 </body>
 </html>

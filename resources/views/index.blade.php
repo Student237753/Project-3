@@ -29,7 +29,6 @@
 <main class="relative flex-grow flex items-center justify-center">
     <!-- Overlay for darkening the Gif background -->
     <div class="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
-
     <!-- White Background div with 60% opacity -->
     <div class="relative z-10 bg-white bg-opacity-60 p-8 sm:p-12 rounded-lg w-11/12 max-w-5xl mx-auto flex flex-col overflow-y-auto" style="max-height: 80vh;">
         <div class="w-full">

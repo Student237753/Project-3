@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Dossier extends Model
 {
@@ -12,17 +13,21 @@ class Dossier extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'subject',
-        'type',
-        'appointment',
+        'type', 'subject', 'research', 'symptoms', 'treatment',
+        'urgency', 'appointment', 'organs', 'questions'
     ];
 
     protected $casts = [
-        'appointment' => 'datetime', // Automatically cast to Carbon instance
+        'appointment' => 'datetime',
     ];
 
-    public function diagnose(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function diagnoses(): HasMany
     {
         return $this->hasMany(Diagnose::class, 'dossierid');
+    }
+
+    public function treatments(): HasMany
+    {
+        return $this->hasMany(Treatment::class);
     }
 }
