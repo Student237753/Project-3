@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Diagnose extends Model
+class Diagnosis extends Model
 {
     use HasFactory;
 
     protected $table = 'diagnosis';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'dossierid',
