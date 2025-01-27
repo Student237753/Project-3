@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Diagnosis;
 use App\Models\Dossier;
+use App\Models\Treatments;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,21 +31,34 @@ class HomeController extends Controller
             'research' => 'nullable|string|max:255',
             'symptoms' => 'required|string|max:255',
             'treatment' => 'nullable|string|max:255',
-            'urgency' => 'required|string|max:255',
-            'questions' => 'nullable|string|max:255',
+            'policy' => 'required|string|max:255',
+            'caseexplanation' => 'nullable|string|max:255',
             'appointment' => 'nullable|date_format:Y-m-d H:i',
+            'organs' => 'nullable|string|max:255',
         ]);
 
         // Maakt nieuwe dossier aan en vult het met de ingevoerde informatie
         $dossier = new Dossier();
+        $diagnosis = new Diagnosis();
+        $treatments = new Treatments();
+
+        // Items die worden toegevoegd in tabel 'dossiers'
         $dossier->subject = $request->input('subject');
         $dossier->type = $request->input('type');
-        $dossier->research = $request->input('research');
-        $dossier->symptoms = $request->input('symptoms');
-        $dossier->treatment = $request->input('treatment');
-        $dossier->questions = $request->input('questions');
         $dossier->appointment = $request->has('appointment');
+
+        // Items die worden toegevoegd in tabel 'treatments'
+        $treatments->treatment = $request->input('treatment');
+        $treatments->policy = $request->input('policy');
+
+        // Items die worden toegevoegd in tabel 'diagnosis'
+        $diagnosis->symptoms = $request->input('symptoms');
+        $diagnosis->caseexplanation = $request->input('caseexplanation');
+        $diagnosis->research = $request->input('research');
+        $diagnosis->organs = $request->input('organs');
+
         // Slaat de gevalideerde informatie op in de database voor de nieuwe dossier
+        $diagnosis->save();
         $dossier->save();
         // Redirect naar de index pagina
         return redirect()->route('index');

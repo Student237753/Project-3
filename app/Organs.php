@@ -36,6 +36,6 @@ enum Organs: string
     case Skelet = 'Skelet';
     case Hypofyse = 'Hypofyse';
     case Lymfeklieren = 'Lymfeklieren';
-    case Zenuwstelcel = 'Zenuwstelcel';
+    case Zenuwstelsel = 'Zenuwstelsel';
     case Extremiteiten = 'Extremiteiten';
 }

@@ -10,11 +10,11 @@ class Dossier extends Model
 {
     use HasFactory;
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'type', 'subject', 'research', 'symptoms', 'treatment',
-        'urgency', 'appointment', 'organs', 'questions'
+        'policy', 'appointment', 'organs', 'questions'
     ];
 
     protected $casts = [
@@ -23,11 +23,11 @@ class Dossier extends Model
 
     public function diagnoses(): HasMany
     {
-        return $this->hasMany(Diagnose::class, 'dossierid');
+        return $this->hasMany(Diagnosis::class, 'dossierid');
     }
 
     public function treatments(): HasMany
     {
-        return $this->hasMany(Treatment::class);
+        return $this->hasMany(Treatments::class);
     }
 }
