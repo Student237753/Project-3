@@ -32,9 +32,8 @@
     <div class="content-container w-full max-w-4xl">
         <form action="{{ route('update', $dossier->id) }}" method="POST" class="flex flex-wrap justify-center h-full gap-10">
             @csrf
-            @method('PUT') <!-- Include the PUT method for updating -->
+            @method('PUT')
 
-            {{-- Left Side --}}
             <div class="w-72">
                 <h3 class="text-xl font-bold">Type:</h3>
                 <select name="type" class="bg-indigo-800 text-white w-full text-center rounded-md text-xl" required>
@@ -69,7 +68,6 @@
                 <input type="datetime-local" name="appointment" value="{{ $dossier->appointment }}" class="bg-indigo-800 text-white w-full rounded-md text-center text-xl">
             </div>
 
-            {{-- Right Side --}}
             <div class="w-72">
                 <p class="text-xl font-bold">Organen:</p>
                 <div class="flex flex-col overflow-y-auto max-h-52 bg-indigo-800 text-white text-xl p-2 rounded-md">

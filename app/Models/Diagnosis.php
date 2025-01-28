@@ -12,7 +12,7 @@ class Diagnosis extends Model
 
     protected $table = 'diagnosis';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'dossierid',
@@ -25,4 +25,9 @@ class Diagnosis extends Model
     {
         return $this->belongsTo(Dossier::class, 'dossierid');
     }
+    public function treatments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Treatments::class, 'diagnosisid');
+    }
+
 }

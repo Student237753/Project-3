@@ -10,7 +10,7 @@ class Dossier extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'type', 'subject', 'research', 'symptoms', 'treatment',

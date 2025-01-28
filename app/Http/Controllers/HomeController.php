@@ -67,7 +67,7 @@ class HomeController extends Controller
     public function show(string $id)
     {
         // Haalt het dossier door middel van id en de bijbehorende diagnoses
-        $dossier = Dossier::with('diagnoses')->findOrFail($id);
+        $dossier = Dossier::with('diagnoses.treatments')->findOrFail($id);
         // Weergeeft show pagina en geeft het gevonden dossier met de bijbehorende diagnose door.
         return view('show', compact('dossier'));
     }
@@ -84,8 +84,25 @@ class HomeController extends Controller
     {
         // Haalt het dossier door middel van id
         $dossier = Dossier::findOrFail($id);
+        // Validatie voor de nieuwe informatie
+        $request->validate([
+            'subject' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'research' => 'nullable|string|max:255',
+            'symptoms' => 'required|string|max:255',
+            'treatment' => 'nullable|string|max:255',
+            'policy' => 'required|string|max:255',
+            'caseexplanation' => 'nullable|string|max:255',
+            'appointment' => 'nullable|date_format:Y-m-d H:i',
+            'organs' => 'nullable|string|max:255',
+        ]);
         // Update alle nieuwe informatie voor het dossier
         $dossier->update($request->all());
+
+        if ($request->has('organs')) {
+            $dossier->organs = implode(',', $request->organs);
+            $dossier->save();
+        }
         // Redirect naar index pagina
         return redirect()->route('index');
     }

@@ -86,8 +86,23 @@
             @endif
         </div>
         <!-- Treatments Details -->
-
-
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-indigo-900 mb-6">Behandeling Details</h2>
+            @foreach($dossier->diagnoses as $diagnose)
+                @foreach($diagnose->treatments as $treatment)
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Behandeling:</span>
+                            <span class="text-gray-900 break-words">{{ $treatment->treatment }}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-gray-700">Beleid:</span>
+                            <span class="text-gray-900 break-words">{{ $treatment->policy }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            @endforeach
+        </div>
         <div class="mt-6 flex space-x-4">
             <a href="{{ route('edit', $dossier->id) }}"
                class="bg-indigo-900 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700">

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Diagnose;
+use App\Models\Diagnosis;
 use Illuminate\Http\Request;
 
 class DiagnoseController extends Controller
@@ -34,7 +34,7 @@ class DiagnoseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Diagnose $diagnose)
+    public function show(Diagnosis $diagnose)
     {
         //
     }
@@ -42,7 +42,7 @@ class DiagnoseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Diagnose $diagnose)
+    public function edit(Diagnosis $diagnose)
     {
         //
     }
@@ -50,7 +50,7 @@ class DiagnoseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Diagnose $diagnose)
+    public function update(Request $request, Diagnosis $diagnose)
     {
         //
     }
@@ -58,7 +58,7 @@ class DiagnoseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Diagnose $diagnose)
+    public function destroy(Diagnosis $diagnose)
     {
         //
     }
