@@ -35,7 +35,7 @@ class HomeController extends Controller
             'policy' => 'required|string|in:U1 Levensbedreigend,U2 Spoed,U3 Dringend,U4 Niet Dringend,U5 Advies',
             'caseexplanation' => 'nullable|string|max:255',
             'appointment' => 'nullable|date_format:Y-m-d H:i',
-            'organs' => 'nullable|array', // Ensure organs is an array
+            'organs' => 'nullable|array', // Beweert dat organs een array is
         ]);
 
         // Maakt nieuwe dossier aan en vult het met de ingevoerde informatie
@@ -66,7 +66,7 @@ class HomeController extends Controller
 
         // Voeg geselecteerde organen toe aan de DiagnosisOrgans pivot table
         if ($request->has('organs')) {
-            $diagnosis->organs()->attach($request->input('organs')); // Attach each selected organ to the diagnosis
+            $diagnosis->organs()->attach($request->input('organs')); // Orgaan koppelen met diagnose
         }
 
         // Redirect naar de index pagina
