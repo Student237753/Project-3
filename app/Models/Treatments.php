@@ -3,16 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Treatments extends Model
 {
-    public $timestamps = false;
 
-    protected $fillable = ['diagnosisid', 'treatments'];
+    protected $fillable = ['diagnosisid', 'treatment', 'policy'];
 
-    public function treatment(): \Illuminate\Database\Eloquent\Relations\HasMany
+    // Relatie met het Diagnosis model (belongs to)
+    public function diagnosis(): BelongsTo
     {
-        return $this->hasMany(Treatments::class, 'diagnosisid');
+        // Verwijzing naar de 'diagnosisid' in de Diagnosis tabel
+        return $this->belongsTo(Diagnosis::class, 'diagnosisid');
     }
-}
 
+}

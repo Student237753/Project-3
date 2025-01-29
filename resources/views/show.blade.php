@@ -64,32 +64,47 @@
                         <div class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700">Onderzoek:</span>
                             <span class="text-gray-900 break-words">
-                            @if($diagnose->research)
+                                @if($diagnose->research)
                                     {{ $diagnose->research }}
                                 @else
                                     Geen
                                 @endif
-                        </span>
+                            </span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700">Opmerking:</span>
                             <span class="text-gray-900 break-words max-h-32 overflow-y-auto">
-                            @if($diagnose->caseexplanation)
+                                @if($diagnose->caseexplanation)
                                     {{ $diagnose->caseexplanation }}
                                 @else
                                     Geen opmerking
                                 @endif
-                        </span>
+                            </span>
+                        </div>
+
+                        <!-- Organs Section -->
+                        <div class="mt-4">
+                            <h3 class="text-lg font-semibold text-indigo-800">Betrokken organen:</h3>
+                            @if($diagnose->organs->isNotEmpty())
+                                <ul class="list-disc list-inside text-gray-900">
+                                    @foreach($diagnose->organs as $organ)
+                                        <li>{{ $organ->name }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p class="text-gray-700">Geen organen gekoppeld aan deze diagnose.</p>
+                            @endif
                         </div>
                     </div>
                 @endforeach
             @endif
         </div>
+
         <!-- Treatments Details -->
         <div class="mt-8">
             <h2 class="text-2xl font-bold text-indigo-900 mb-6">Behandeling Details</h2>
-            @foreach($dossier->diagnoses as $diagnose)
-                @foreach($diagnose->treatments as $treatment)
+            @forelse($dossier->diagnoses as $diagnose)
+                @forelse($diagnose->treatments as $treatment)
                     <div class="space-y-4">
                         <div class="flex justify-between items-center">
                             <span class="font-semibold text-gray-700">Behandeling:</span>
@@ -100,9 +115,14 @@
                             <span class="text-gray-900 break-words">{{ $treatment->policy }}</span>
                         </div>
                     </div>
-                @endforeach
-            @endforeach
+                @empty
+                    <p class="text-gray-700">Geen behandelingsdetails gevonden.</p>
+                @endforelse
+            @empty
+                <p class="text-gray-700">Geen diagnoses gevonden met behandelingsdetails.</p>
+            @endforelse
         </div>
+
         <div class="mt-6 flex space-x-4">
             <a href="{{ route('edit', $dossier->id) }}"
                class="bg-indigo-900 text-white py-2 px-4 rounded-lg shadow hover:bg-indigo-700">

@@ -18,16 +18,21 @@ class Dossier extends Model
     ];
 
     protected $casts = [
-        'appointment' => 'datetime',
+        'appointment' => 'datetime', // Zet appointment in datetime format
     ];
 
+    // Relatie met het Diagnosis model (has many)
     public function diagnoses(): HasMany
     {
+        // Verwijzing naar de 'dossierid' in de Diagnosis tabel
         return $this->hasMany(Diagnosis::class, 'dossierid');
     }
 
+    // Relatie met het Treatments model (has many)
     public function treatments(): HasMany
     {
-        return $this->hasMany(Treatments::class);
+        // Verwijzing naar de 'dossierid' in de Treatments tabel
+        return $this->hasMany(Treatments::class, 'dossierid');
     }
+
 }

@@ -34,7 +34,7 @@
             @csrf
             @method('PUT')
 
-            <div class="w-72">
+            <div class="w-full md:w-72">
                 <h3 class="text-xl font-bold">Type:</h3>
                 <select name="type" class="bg-indigo-800 text-white w-full text-center rounded-md text-xl" required>
                     <option {{ $dossier->type == 'Man' ? 'selected' : '' }}>Man</option>
@@ -47,41 +47,41 @@
                 <input type="text" max="100" name="subject" value="{{ $dossier->subject }}" class="bg-indigo-800 text-white w-full rounded-md text-xl" required>
 
                 <p class="text-xl font-bold mt-4">Onderzoeken:</p>
-                <input type="text" max="100" name="research" value="{{ $dossier->research }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
+                <input type="text" name="research" value="{{ optional($dossier->diagnoses->first())->research }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
 
                 <p class="text-xl font-bold mt-4">Klachten:</p>
-                <input type="text" max="100" name="symptoms" value="{{ $dossier->symptoms }}" class="bg-indigo-800 text-white w-full rounded-md text-xl" required>
+                <input type="text" name="symptoms" value="{{ optional($dossier->diagnoses->first())->symptoms }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
 
                 <p class="text-xl font-bold mt-4">Behandeling:</p>
-                <input type="text" name="treatment" value="{{ $dossier->treatment }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
+                <input type="text" name="treatment" value="{{ optional($dossier->diagnoses->first()->treatments->first())->treatment }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
 
                 <p class="text-xl font-bold mt-4">Urgentie:</p>
                 <select name="urgency" class="bg-indigo-800 text-white w-full text-center rounded-md text-xl" required>
-                    <option {{ $dossier->urgency == 'U1 Levensbedreigend' ? 'selected' : '' }}>U1 Levensbedreigend</option>
-                    <option {{ $dossier->urgency == 'U2 Spoed' ? 'selected' : '' }}>U2 Spoed</option>
-                    <option {{ $dossier->urgency == 'U3 Dringend' ? 'selected' : '' }}>U3 Dringend</option>
-                    <option {{ $dossier->urgency == 'U4 Niet Dringend' ? 'selected' : '' }}>U4 Niet Dringend</option>
-                    <option {{ $dossier->urgency == 'U5 Advies' ? 'selected' : '' }}>U5 Advies</option>
+                    <option {{ optional($dossier->diagnoses->first()->treatments->first())->policy == 'U1 Levensbedreigend' ? 'selected' : '' }}>U1 Levensbedreigend</option>
+                    <option {{ optional($dossier->diagnoses->first()->treatments->first())->policy == 'U2 Spoed' ? 'selected' : '' }}>U2 Spoed</option>
+                    <option {{ optional($dossier->diagnoses->first()->treatments->first())->policy == 'U3 Dringend' ? 'selected' : '' }}>U3 Dringend</option>
+                    <option {{ optional($dossier->diagnoses->first()->treatments->first())->policy == 'U4 Niet Dringend' ? 'selected' : '' }}>U4 Niet Dringend</option>
+                    <option {{ optional($dossier->diagnoses->first()->treatments->first())->policy == 'U5 Advies' ? 'selected' : '' }}>U5 Advies</option>
                 </select>
 
                 <p class="text-xl font-bold mt-4">Afspraak:</p>
                 <input type="datetime-local" name="appointment" value="{{ $dossier->appointment }}" class="bg-indigo-800 text-white w-full rounded-md text-center text-xl">
             </div>
 
-            <div class="w-72">
+            <div class="w-full md:w-72">
                 <p class="text-xl font-bold">Organen:</p>
                 <div class="flex flex-col overflow-y-auto max-h-52 bg-indigo-800 text-white text-xl p-2 rounded-md">
-                    @foreach(['Hersenen', 'Hart', 'Longen', 'Slokdarm', 'Luchtpijp', 'Dikke darm', 'Dunne darm', 'Twaalfvingerige darm', 'Endeldarm', 'Maag', 'Lever', 'Galblaas', 'Nieren', 'Blaas', 'Baarmoeder', 'Ogen', 'Oren', 'Neus', 'Mondholte', 'Keelholte', 'Schildklier', 'Alvleesklier', 'Kleine bloedsomloop', 'Grote bloedsomloop', 'Aorta', 'Huid', 'Eierstokken', 'Prostaat', 'Zaadballen', 'Skelet', 'Hypofyse', 'Lymfeklieren', 'Zenuwstelsel', 'Extremiteiten'] as $organ)
-                        <div class="flex">
-                            <input type="checkbox" value="{{ $organ }}" name="organs[]" class="w-4" {{ in_array($organ, explode(',', $dossier->organs)) ? 'checked' : '' }}>
-                            <label for="{{ $organ }}">{{ $organ }}</label>
+                    @foreach($allOrgans as $organ)
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" value="{{ $organ->id }}" name="organs[]" class="w-4"
+                                {{ $dossier->diagnoses->first()->organs->contains($organ->id) ? 'checked' : '' }}>
+                            <label for="{{ $organ->id }}" class="text-xl">{{ $organ->name }}</label>
                         </div>
                     @endforeach
                 </div>
 
                 <p class="text-xl font-bold mt-4">Opmerkingen:</p>
-                <textarea class="bg-indigo-800 text-white h-32 w-full rounded-md text-xl" name="questions">{{ $dossier->questions }}</textarea>
-
+                <input type="text" name="Opmerkingen" value="{{ optional($dossier->diagnoses->first())->caseexplanation }}" class="bg-indigo-800 text-white w-full rounded-md text-xl">
                 <div class="flex text-xl justify-end gap-2 mt-4">
                     <a class="bg-red-500 text-white w-28 text-center rounded-md py-2" href="{{ route('index') }}">
                         Annuleren

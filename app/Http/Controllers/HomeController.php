@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Diagnosis;
 use App\Models\Dossier;
 use App\Models\Treatments;
+use App\Models\Organ;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,10 +32,10 @@ class HomeController extends Controller
             'research' => 'nullable|string|max:255',
             'symptoms' => 'required|string|max:255',
             'treatment' => 'nullable|string|max:255',
-            'policy' => 'required|string|max:255',
+            'policy' => 'required|string|in:U1 Levensbedreigend,U2 Spoed,U3 Dringend,U4 Niet Dringend,U5 Advies',
             'caseexplanation' => 'nullable|string|max:255',
             'appointment' => 'nullable|date_format:Y-m-d H:i',
-            'organs' => 'nullable|string|max:255',
+            'organs' => 'nullable|array', // Ensure organs is an array
         ]);
 
         // Maakt nieuwe dossier aan en vult het met de ingevoerde informatie
@@ -45,7 +46,7 @@ class HomeController extends Controller
         // Items die worden toegevoegd in tabel 'dossiers'
         $dossier->subject = $request->input('subject');
         $dossier->type = $request->input('type');
-        $dossier->appointment = $request->has('appointment');
+        $dossier->appointment = $request->input('appointment');
 
         // Items die worden toegevoegd in tabel 'treatments'
         $treatments->treatment = $request->input('treatment');
@@ -55,35 +56,45 @@ class HomeController extends Controller
         $diagnosis->symptoms = $request->input('symptoms');
         $diagnosis->caseexplanation = $request->input('caseexplanation');
         $diagnosis->research = $request->input('research');
-        $diagnosis->organs = $request->input('organs');
 
         // Slaat de gevalideerde informatie op in de database voor de nieuwe dossier
-        $diagnosis->save();
         $dossier->save();
+        $diagnosis->dossierid = $dossier->id;
+        $diagnosis->save();
+        $treatments->diagnosisid = $diagnosis->id;
+        $treatments->save();
+
+        // Voeg geselecteerde organen toe aan de DiagnosisOrgans pivot table
+        if ($request->has('organs')) {
+            $diagnosis->organs()->attach($request->input('organs')); // Attach each selected organ to the diagnosis
+        }
+
         // Redirect naar de index pagina
         return redirect()->route('index');
     }
 
     public function show(string $id)
     {
-        // Haalt het dossier door middel van id en de bijbehorende diagnoses
-        $dossier = Dossier::with('diagnoses.treatments')->findOrFail($id);
-        // Weergeeft show pagina en geeft het gevonden dossier met de bijbehorende diagnose door.
+        // Haalt het dossier door middel van id en de bijbehorende diagnose en laad de treatment en organs die bij de diagnose horen
+        $dossier = Dossier::with('diagnoses.treatments', 'diagnoses.organs')->findOrFail($id);
+        // Weergeeft show pagina en geeft het gevonden dossier met de bijbehorende info.
         return view('show', compact('dossier'));
     }
 
     public function edit($id)
     {
-        // Haalt het dossier door middel van id
-        $dossier = Dossier::findOrFail($id);
+        // Haalt het dossier met bijbehorende diagnose, behandeling en organen
+        $dossier = Dossier::with(['diagnoses.treatments', 'diagnoses.organs'])->findOrFail($id);
+        // Haalt alle organen op uit organs tabel
+        $allOrgans = Organ::all();
         // Weergeeft edit pagina en geeft het gevonden dossier door.
-        return view('edit', compact('dossier'));
+        return view('edit', compact('dossier', 'allOrgans'));
     }
 
     public function update(Request $request, $id)
     {
-        // Haalt het dossier door middel van id
-        $dossier = Dossier::findOrFail($id);
+        // Haalt het dossier met bijbehorende diagnose, behandeling en organen
+        $dossier = Dossier::with('diagnoses.treatments', 'diagnoses.organs')->findOrFail($id);
         // Validatie voor de nieuwe informatie
         $request->validate([
             'subject' => 'required|string|max:255',
@@ -100,8 +111,7 @@ class HomeController extends Controller
         $dossier->update($request->all());
 
         if ($request->has('organs')) {
-            $dossier->organs = implode(',', $request->organs);
-            $dossier->save();
+            $dossier->diagnoses->first()->organs()->sync($request->organs);
         }
         // Redirect naar index pagina
         return redirect()->route('index');
